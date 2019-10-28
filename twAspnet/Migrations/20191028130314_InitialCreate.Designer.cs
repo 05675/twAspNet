@@ -9,7 +9,7 @@ using twAspnet.Models;
 namespace twAspnet.Migrations
 {
     [DbContext(typeof(TwaspDbContext))]
-    [Migration("20191014032347_InitialCreate")]
+    [Migration("20191028130314_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,14 +18,31 @@ namespace twAspnet.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0");
 
+            modelBuilder.Entity("twAspnet.Models.Enviroment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Ckey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Csecret")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Enviroment");
+                });
+
             modelBuilder.Entity("twAspnet.Models.Favorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Comment")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Comment")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Favoritedate")
                         .HasColumnType("TEXT");
@@ -35,7 +52,7 @@ namespace twAspnet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("Favorite");
                 });
 
             modelBuilder.Entity("twAspnet.Models.UserInfo", b =>
@@ -47,15 +64,15 @@ namespace twAspnet.Migrations
                     b.Property<string>("Mail")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Regdate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserInfos");
+                    b.ToTable("UserInfo");
                 });
 #pragma warning restore 612, 618
         }

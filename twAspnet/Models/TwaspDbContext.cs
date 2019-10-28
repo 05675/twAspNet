@@ -12,6 +12,7 @@ namespace twAspnet.Models
         : base(options) { }
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<Favorite> Favorite { get; set; }
+        public DbSet<Enviroment> Enviroment { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
         optionsBuilder.UseSqlite("Data Source=Twasp.db");
     }

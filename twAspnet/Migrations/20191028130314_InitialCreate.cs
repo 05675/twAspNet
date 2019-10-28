@@ -8,43 +8,60 @@ namespace twAspnet.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Favorites",
+                name: "Enviroment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Ckey = table.Column<string>(nullable: true),
+                    Csecret = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Enviroment", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Favorite",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Twid = table.Column<int>(nullable: false),
-                    Comment = table.Column<int>(nullable: false),
+                    Comment = table.Column<string>(nullable: true),
                     Favoritedate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorites", x => x.Id);
+                    table.PrimaryKey("PK_Favorite", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserInfos",
+                name: "UserInfo",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Mail = table.Column<string>(nullable: true),
-                    Name = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     Regdate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserInfos", x => x.Id);
+                    table.PrimaryKey("PK_UserInfo", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Favorites");
+                name: "Enviroment");
 
             migrationBuilder.DropTable(
-                name: "UserInfos");
+                name: "Favorite");
+
+            migrationBuilder.DropTable(
+                name: "UserInfo");
         }
     }
 }

@@ -16,6 +16,23 @@ namespace twAspnet.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0");
 
+            modelBuilder.Entity("twAspnet.Models.Enviroment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Ckey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Csecret")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Enviroment");
+                });
+
             modelBuilder.Entity("twAspnet.Models.Favorite", b =>
                 {
                     b.Property<int>("Id")

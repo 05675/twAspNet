@@ -7,6 +7,7 @@ namespace twAspnet.Models
 {
     public class Enviroment
     {
+        public int Id { get; set; }
         public string Ckey { get; set; }
         public string Csecret { get; set; }
     }

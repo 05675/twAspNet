@@ -39,9 +39,18 @@ namespace TwAspnet
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
+                //TwitterAPI‚ðDB‚©‚çŽæ“¾
                 .AddTwitter(twitterOptions => {
-                    twitterOptions.ConsumerKey = "MyAPI";
-                    twitterOptions.ConsumerSecret = "MyAPI";
+                    var option = new DbContextOptionsBuilder<TwaspDbContext>();
+                    var connectionString = "Twasp.db";
+                    option.UseSqlite(connectionString);
+                    using var context = new TwaspDbContext(option.Options);
+                    var enviroment = context.Enviroment.Single();
+                    var key = enviroment.Ckey;
+                    var secret = enviroment.Csecret;
+
+                    twitterOptions.ConsumerKey = key;
+                    twitterOptions.ConsumerSecret = secret;
                 }).AddCookie(options => 
             {
                 options.LoginPath = "/Auth/Login";

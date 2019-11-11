@@ -7,6 +7,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="CoreTweet" Version="1.0.0.483" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />

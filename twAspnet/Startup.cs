@@ -46,11 +46,11 @@ namespace TwAspnet
                     option.UseSqlite(connectionString);
                     using var context = new TwaspDbContext(option.Options);
                     var enviroment = context.Enviroment.Single();
-                    var key = enviroment.Ckey;
-                    var secret = enviroment.Csecret;
+                    var key = enviroment.Akey;
+                    var secretKey = enviroment.ASecretKey;
 
                     twitterOptions.ConsumerKey = key;
-                    twitterOptions.ConsumerSecret = secret;
+                    twitterOptions.ConsumerSecret = secretKey;
                 }).AddCookie(options => 
             {
                 options.LoginPath = "/Auth/Login";

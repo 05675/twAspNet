@@ -8,7 +8,9 @@ namespace twAspnet.Models
     public class Enviroment
     {
         public int Id { get; set; }
-        public string Ckey { get; set; }
-        public string Csecret { get; set; }
+        public string Akey { get; set; }
+        public string ASecretKey { get; set; }
+        public string AToken { get; set; }
+        public string ATokenSecret { get; set; }
     }
 }

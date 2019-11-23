@@ -1,10 +1,29 @@
 ﻿    <div class="text-center">
     <h1 class="display-4">Twitter #Search</h1>
     <div style="display:inline-flex">
-        <form action="" method="post" class="js-post_include" target="#jsChangeContents">
-            <input id="text" type="text" />
-            <input id="submit" type="submit" value="検索" />
+        <form action="Index" method="get">
+            <input type="text" name="search" value="@ViewBag.Search"/>
+            <input type="submit" value="検索" />
         </form>
+        @*ページング*@
+            @if(ViewBag.Prev != null)
+            {
+                <a asp-action="Index" asp-route-page="@ViewBag.Prev"
+                   asp-route-search="@ViewBag.Search">Prev</a>
+            }
+            else
+            {
+                <span>prev</span>
+            }
+            @if(ViewBag.Next != null)
+            {
+                <a asp-action="Index" asp-route-page="@ViewBag.Next"
+                   asp-route-search="@ViewBag.Search">next</a>
+            }
+            else
+            {
+                <span>next</span>
+            }
     </div>
     <div id="jsChangeContents">
         @*<thead>   //データセル毎に分けてヘッダー名を表示？
@@ -19,7 +38,6 @@
                 <th id="">取込済</th>
             </tr>
         </thead>*@
-        <p>この部分が置き換わります。</p>
     </div>
     <p>Learn about <a href="https://www.google.co.jp/">ASP.NET Core MVC</a>.</p>
 </div>

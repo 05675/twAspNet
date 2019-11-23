@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreTweet;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using twAspnet.Models;
@@ -10,9 +11,20 @@ using twAspnet.Models;
 namespace twAspnet.Controllers
 {
     public class EnviromentController : Controller
-    {       
-        private void TweetSearch()
+    {
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+        public IActionResult Index(string search)
         {
+            //if (page == null)
+            //{
+            //    page = 0;
+            //}
+            //int max = 5;
+
+            //var hashtag =
 
             var option = new DbContextOptionsBuilder<TwaspDbContext>();
             var connectionString = "Twasp.db";
@@ -20,21 +32,27 @@ namespace twAspnet.Controllers
             using var context = new TwaspDbContext(option.Options);
             var enviroment = context.Enviroment.Single();
 
-            string keyword = "電子工作";
-            var tokens = Tokens.Create(enviroment.Akey, enviroment.ASecretKey, enviroment.AToken, enviroment.ATokenSecret);
-            var result = tokens.Search.Tweets(count => 100, q => keyword);
-            //countは読み込み数。指定しなければDefoultの数値が入る。
-            foreach (var value in result)
+            string keyword = search;
+
+            if (!string.IsNullOrEmpty(search))
             {
-                string scrName = value.User.ScreenName; //@User_ID
-                string name = value.User.Name; //ユーザー名
-                string text = value.Text; //Tweet
-                textBoxStatus.AppendText("@" + scrName.ToString() + " / " + name + System.Environment.NewLine + text + System.Environment.NewLine);
+                var tokens = Tokens.Create(enviroment.Akey, enviroment.ASecretKey, enviroment.AToken, enviroment.ATokenSecret);
+                var result = tokens.Search.Tweets(count => 100, q => keyword);
+                //countは読み込み数。指定しなければDefoultの数値が入る。
+                foreach (var value in result)
+                {
+                    string scrName = value.User.ScreenName; //@User_ID
+                    string name = value.User.Name;          //ユーザー名
+                    string text = value.Text;               //Tweet
+                                                            // textBoxStatus.AppendText("@" + scrName.ToString() + " / " + name + System.Environment.NewLine + text + System.Environment.NewLine);
+                }
             }
-        }
-        public IActionResult Index()
-        {
             return View();
+        }
+        
+        public void TweetSearch()
+        {
+
         }
     }
 }

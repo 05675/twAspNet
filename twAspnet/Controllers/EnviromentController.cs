@@ -16,26 +16,18 @@ namespace twAspnet.Controllers
         //{
         //    return View();
         //}
-        public IActionResult Index(string search)
+        public IActionResult Index(IFormCollection formCollection)
         {
-            //if (page == null)
-            //{
-            //    page = 0;
-            //}
-            //int max = 5;
-
-            //var hashtag =
+            string keyword = formCollection["search"];
 
             var option = new DbContextOptionsBuilder<TwaspDbContext>();
             var connectionString = "Twasp.db";
             option.UseSqlite(connectionString);
             using var context = new TwaspDbContext(option.Options);
-            var enviroment = context.Enviroment.Single();
+            var enviroment = context.Enviroment.Single();            
 
-            string keyword = search;
-
-            if (!string.IsNullOrEmpty(search))
-            {
+            if (!string.IsNullOrEmpty(keyword))
+            { 
                 var tokens = Tokens.Create(enviroment.Akey, enviroment.ASecretKey, enviroment.AToken, enviroment.ATokenSecret);
                 var result = tokens.Search.Tweets(count => 100, q => keyword);
                 //countは読み込み数。指定しなければDefoultの数値が入る。
@@ -47,7 +39,7 @@ namespace twAspnet.Controllers
                                                             // textBoxStatus.AppendText("@" + scrName.ToString() + " / " + name + System.Environment.NewLine + text + System.Environment.NewLine);
                 }
             }
-            return View();
+                return View();
         }
         
         public void TweetSearch()

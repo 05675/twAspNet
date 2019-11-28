@@ -1,4 +1,6 @@
-﻿    <div class="text-center">
+﻿@using twAspnet.Controllers;
+
+<div class="text-center">
     <h1 class="display-4">Twitter #Search</h1>
     <div style="display:inline-flex">
         <form asp-controller="Enviroment" asp-action="Index" method="post">
@@ -25,19 +27,31 @@
             <span>next</span>
         }
     </div>
-    <div id="jsChangeContents">
-        @*<thead>   //データセル毎に分けてヘッダー名を表示？
-            <tr>
-                <th id="">試験ID</th>
-                <th id="">試験名</th>
-                <th id="">試験回次</th>
-                <th id="">成績提供期間</th>
-                <th id="">成績未受理</th>
-                <th id="">未出力</th>
-                <th id="">未取込</th>
-                <th id="">取込済</th>
-            </tr>
-        </thead>*@
+
+    <div class="box-header">
+        <h3 class="box-title">検索結果</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @*<span asp-validation-for="TestId" class="text-red"></span>*@
+        <table id="example2" class="table table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th>
+                        @foreach (var item in (List<EnviromentController>)ViewData["result"])
+                        {
+                            <blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><br><br><br><br><br><a href="https://t.co/UeIJfkaTM2">https://t.co/UeIJfkaTM2</a> <a href="https://t.co/36X1ceqqNm">pic.twitter.com/36X1ceqqNm</a></p>&mdash; sakumaru🥖うさまるといっしょ () <a href="https://twitter.com/skmr_29/status/1199161616744366080?ref_src=twsrc%5Etfw">November 26, 2019</a></blockquote>
+                        }
+
+                    </th>
+                    <th id="">ユーザー名</th>
+                    <th id="">ツイート</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
+
     </div>
     <p>Learn about <a href="https://www.google.co.jp/">ASP.NET Core MVC</a>.</p>
-</div>

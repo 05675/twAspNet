@@ -21,15 +21,15 @@
                     <th id="">ユーザーID</th>
                     <th id="">ユーザー名</th>
                     <th id="">ツイート</th>
+                    <th id="">ツイート</th>
                 </tr>
                     @if ((bool)ViewData["searched"])
                         @foreach (var item in (CoreTweet.SearchResult)ViewData["result"])
                         {
                             <tr>
-                            <td>@item.User.ScreenName</td>
-                            <td>@item.User.Name</td>
-                            <td>@item.Text</td>
-                            @*<hr />*@
+                                <td>@item.User.ScreenName</td>
+                                <td>@item.User.Name</td>
+                                <td>@item.Text</td>
                             </tr>
                         }
             </thead>

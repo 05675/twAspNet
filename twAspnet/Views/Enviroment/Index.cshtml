@@ -15,23 +15,23 @@
     </div>
     
     <div class="box-body">
-        <table id="example2" class="table table-bordered table-hover ">
+        <table id="example2" class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>
-                        @if((bool)ViewData["searched"])
-                            @foreach (var item in (CoreTweet.SearchResult)ViewData["result"])
-                            {
-                                <p>screenName:@item.User.ScreenName</p>
-                                <p>name:@item.User.Name</p>
-                                <p>tweetText:@item.Text</p>
-                                <hr />
-                            }
-                        }
-                    </th>
+                    <th id="">ユーザーID</th>
                     <th id="">ユーザー名</th>
                     <th id="">ツイート</th>
                 </tr>
+                    @if ((bool)ViewData["searched"])
+                        @foreach (var item in (CoreTweet.SearchResult)ViewData["result"])
+                        {
+                            <tr>
+                            <td>@item.User.ScreenName</td>
+                            <td>@item.User.Name</td>
+                            <td>@item.Text</td>
+                            @*<hr />*@
+                            </tr>
+                        }
             </thead>
             <tbody></tbody>
         </table>

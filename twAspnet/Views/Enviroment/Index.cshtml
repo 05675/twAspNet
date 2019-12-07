@@ -1,41 +1,29 @@
 ﻿@using twAspnet.Controllers;
 @using CoreTweet;
 
-<div class="text-center">
-    <h1 class="display-4">Twitter #Search</h1>
-    <div style="display:inline-flex">
-        <form asp-controller="Enviroment" asp-action="Index" method="post">
-            <input type="text" name="search" value="@ViewBag.Search" />
-            <input type="submit" value="検索" />
-        </form>
-    </div>
+    <div class="text-center">
+        <h1 class="display-4">Twitter #Search</h1>
+        <div style="display:inline-flex">
+            <form asp-controller="Enviroment" asp-action="Index" method="post">
+                <input type="text" name="search" value="@ViewBag.Search" />
+                <input type="submit" value="検索" />
+            </form>
+        </div>
 
-    <div class="box-header">
-        <h3 class="box-title">検索結果</h3>
-    </div>
-    
-    <div class="box-body">
-        <table id="example2" class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th id="">ユーザーID</th>
-                    <th id="">ユーザー名</th>
-                    <th id="">ツイート</th>
-                    <th id="">ツイート</th>
-                </tr>
-                    @if ((bool)ViewData["searched"])
-                        @foreach (var item in (CoreTweet.SearchResult)ViewData["result"])
-                        {
-                            <tr>
-                                <td>@item.User.ScreenName</td>
-                                <td>@item.User.Name</td>
-                                <td>@item.Text</td>
-                            </tr>
-                        }
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
+        <div class="box-header">
+            <h3 class="box-title">検索結果</h3>
+        </div>
 
-</div>
+        <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">本日、Twitterは利用規約とプライバシーポリシーを更新し、Twitterプライバシーセンターを開設しました。 これらの更新は、データの安全性を維持し、常に説明責任を果たすための取り組みです。<br>詳細についてはこちらをご覧ください。<a href="https://t.co/pAAxXGhI7y">https://t.co/pAAxXGhI7y</a> <a href="https://t.co/d46GVOmx5y">https://t.co/d46GVOmx5y</a></p>&mdash; Twitter Japan (TwitterJP) <a href="https://twitter.com/TwitterJP/status/1201690305705046017?ref_src=twsrc%5Etfw">December 3, 2019</a></blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+        <div class="box-body">
+            @if ((bool)ViewData["searched"])
+                @foreach (var item in (CoreTweet.SearchResult)ViewData["result"])
+                {
+                    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">@item.Text</p>&mdash; @item.User.ScreenName (@item.User.Name) <a href="@item.CreatedAt">@item.Place</a></blockquote>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                }
+        </div>
+    </div>
 <p>Learn about <a href="https://www.google.co.jp/">ASP.NET Core MVC</a>.</p>

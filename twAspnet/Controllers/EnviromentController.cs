@@ -14,29 +14,29 @@ namespace twAspnet.Controllers
     {
         public IActionResult Index(IFormCollection formCollection)
         {
-            string keyword = formCollection["search"];
+                string keyword = formCollection["search"];
 
-            //DBからkeyを取得
-            var option = new DbContextOptionsBuilder<TwaspDbContext>();
-            var connectionString = "Twasp.db";
-            option.UseSqlite(connectionString);
-            using var context = new TwaspDbContext(option.Options);
-            var enviroment = context.Enviroment.Single();
+                //DBからkeyを取得
+                var option = new DbContextOptionsBuilder<TwaspDbContext>();
+                var connectionString = "Twasp.db";
+                option.UseSqlite(connectionString);
+                using var context = new TwaspDbContext(option.Options);
+                var enviroment = context.Enviroment.Single();
 
-            //検索
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                ViewData["searched"] = true;
-                var tokens = Tokens.Create(enviroment.Akey, enviroment.ASecretKey, enviroment.AToken, enviroment.ATokenSecret);
-                var result = tokens.Search.Tweets(count => 100, q => keyword);
-                ViewData["result"] = result;
-            }
-            else
-            {
-                //検索をしていない
-                ViewData["searched"] = false;
-            }
-            return View();
+                //検索
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    ViewData["searched"] = true;
+                    var tokens = Tokens.Create(enviroment.Akey, enviroment.ASecretKey, enviroment.AToken, enviroment.ATokenSecret);
+                    var result = tokens.Search.Tweets(count => 10, q => keyword);
+                    ViewData["result"] = result;
+                }
+                else
+                {
+                    //検索をしていない
+                    ViewData["searched"] = false;
+                }
+                return View();
         }
         public IActionResult ShowSearchResults()
         {

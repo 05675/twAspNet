@@ -14,16 +14,14 @@
             <h3 class="box-title">検索結果</h3>
         </div>
 
-        <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">本日、Twitterは利用規約とプライバシーポリシーを更新し、Twitterプライバシーセンターを開設しました。 これらの更新は、データの安全性を維持し、常に説明責任を果たすための取り組みです。<br>詳細についてはこちらをご覧ください。<a href="https://t.co/pAAxXGhI7y">https://t.co/pAAxXGhI7y</a> <a href="https://t.co/d46GVOmx5y">https://t.co/d46GVOmx5y</a></p>&mdash; Twitter Japan (TwitterJP) <a href="https://twitter.com/TwitterJP/status/1201690305705046017?ref_src=twsrc%5Etfw">December 3, 2019</a></blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
         <div class="box-body">
+            
             @if ((bool)ViewData["searched"])
                 @foreach (var item in (CoreTweet.SearchResult)ViewData["result"])
                 {
-                    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">@item.Text</p>&mdash; @item.User.ScreenName (@item.User.Name) <a href="@item.CreatedAt">@item.Place</a></blockquote>
+                    <blockquote class="twitter-tweet" data-lang="ja">@item.Text &mdash; @item.User.ScreenName (@item.User.Name) <a href="https://twitter.com/@item.User.ScreenName/status/@item.User.Id?ref_src=twsrc%5Etfw">@item.CreatedAt</a></blockquote>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                }
+                 }
         </div>
     </div>
 <p>Learn about <a href="https://www.google.co.jp/">ASP.NET Core MVC</a>.</p>

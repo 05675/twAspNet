@@ -12,35 +12,54 @@ namespace twAspnet.Controllers
 {
     public class EnviromentController : Controller
     {
+        private readonly TwaspDbContext context;
+
+        public EnviromentController(TwaspDbContext context)
+        {
+            this.context = context;
+        }
         public IActionResult Index(IFormCollection formCollection)
         {
-                string keyword = formCollection["search"];
+            string keyword = formCollection["search"];
+            var enviroment = context.Enviroment.Single();
 
-                //DBからkeyを取得
-                var option = new DbContextOptionsBuilder<TwaspDbContext>();
-                var connectionString = "Twasp.db";
-                option.UseSqlite(connectionString);
-                using var context = new TwaspDbContext(option.Options);
-                var enviroment = context.Enviroment.Single();
-
-                //検索
-                if (!string.IsNullOrEmpty(keyword))
-                {
-                    ViewData["searched"] = true;
-                    var tokens = Tokens.Create(enviroment.Akey, enviroment.ASecretKey, enviroment.AToken, enviroment.ATokenSecret);
-                    var result = tokens.Search.Tweets(count => 10, q => keyword);
-                    ViewData["result"] = result;
-                }
-                else
-                {
-                    //検索をしていない
-                    ViewData["searched"] = false;
-                }
-                return View();
-        }
-        public IActionResult ShowSearchResults()
-        {
+            //検索実行
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                ViewData["searched"] = true;
+                var tokens = Tokens.Create(enviroment.Akey, enviroment.ASecretKey, enviroment.AToken, enviroment.ATokenSecret);
+                var result = tokens.Search.Tweets(count => 10, q => keyword);
+                ViewData["result"] = result;
+            }
+            else
+            {
+                //検索をしていない
+                ViewData["searched"] = false;
+            }
             return View();
+        }
+        public IActionResult RegisterFavorite(IFormCollection formCollection)
+        {
+            var searchTweet = formCollection["searchTweet"];
+            var searchScreenName = formCollection["searchScreenName"];
+            var searchName = formCollection["searchName"];
+            var searchId = formCollection["searchId"];
+            var searchCreatedAt = formCollection["searchCreatedAt"];
+
+            var favorite = new Favorite();
+            favorite.Tweet = searchTweet;
+            favorite.ScreenName = searchScreenName;
+            favorite.Name = searchName;
+            favorite.UrlId = searchId;
+            favorite.CreatedAt = searchCreatedAt;
+            favorite.Favoritedate = DateTime.Now;
+
+            //DBへInsert
+            context.Favorite.Add(favorite);
+            //Commit
+            context.SaveChanges();
+            
+            return RedirectToAction("Index");
         }
     }
 }

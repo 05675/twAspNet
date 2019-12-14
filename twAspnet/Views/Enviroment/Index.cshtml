@@ -15,14 +15,21 @@
         </div>
 
         <div class="box-body">
-            
+
             @if ((bool)ViewData["searched"])
                 @foreach (var item in (CoreTweet.SearchResult)ViewData["result"])
                 {
                     <blockquote class="twitter-tweet" data-lang="ja">@item.Text &mdash; @item.User.ScreenName (@item.User.Name) <a href="https://twitter.com/@item.User.ScreenName/status/@item.User.Id?ref_src=twsrc%5Etfw">@item.CreatedAt</a></blockquote>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    <input type="button" value="お気に入り登録" />
-                 }
-        </div>
+                    <form asp-controller="Enviroment" asp-action="RegisterFavorite" method="post">
+                        <input type="hidden" name="searchTweet" value="@item.Text">
+                        <input type="hidden" name="searchScreenName" value="@item.User.ScreenName">
+                        <input type="hidden" name="searchName" value="@item.User.Name">
+                        <input type="hidden" name="searchId" value="@item.User.Id">
+                        <input type="hidden" name="searchCreatedAt" value="@item.CreatedAt">
+                        <input type="submit" value="お気に入り登録" />
+                    </form>
+                }
+                </div>
     </div>
 <p>Learn about <a href="https://www.google.co.jp/">ASP.NET Core MVC</a>.</p>

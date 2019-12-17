@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreTweet;
@@ -18,8 +19,11 @@ namespace twAspnet.Controllers
         {
             this.context = context;
         }
-        public IActionResult Index(IFormCollection formCollection)
+        public NameValueCollection Form { get; }
+
+    public IActionResult Index(IFormCollection formCollection)
         {
+            
             string keyword = formCollection["search"];
             var enviroment = context.Enviroment.Single();
 
@@ -45,14 +49,18 @@ namespace twAspnet.Controllers
             var searchName = formCollection["searchName"];
             var searchId = formCollection["searchId"];
             var searchCreatedAt = formCollection["searchCreatedAt"];
+            //string searchExecution = formCollection["search"];
 
-            var favorite = new Favorite();
-            favorite.Tweet = searchTweet;
-            favorite.ScreenName = searchScreenName;
-            favorite.Name = searchName;
-            favorite.UrlId = searchId;
-            favorite.CreatedAt = searchCreatedAt;
-            favorite.Favoritedate = DateTime.Now;
+            var favorite = new Favorite
+            {
+                Tweet = searchTweet,
+                ScreenName = searchScreenName,
+                Name = searchName,
+                UrlId = searchId,
+                CreatedAt = searchCreatedAt,
+                Favoritedate = DateTime.Now,
+            };
+
 
             //DBへInsert
             context.Favorite.Add(favorite);

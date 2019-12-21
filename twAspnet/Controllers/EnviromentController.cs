@@ -21,11 +21,10 @@ namespace twAspnet.Controllers
         }
         public NameValueCollection Form { get; }
 
-    public IActionResult Index(IFormCollection formCollection)
+        private IActionResult Search(string keyword)
         {
-            
-            string keyword = formCollection["search"];
             var enviroment = context.Enviroment.Single();
+            ViewData["searchKey"] = keyword;
 
             //検索実行
             if (!string.IsNullOrEmpty(keyword))
@@ -40,7 +39,12 @@ namespace twAspnet.Controllers
                 //検索をしていない
                 ViewData["searched"] = false;
             }
-            return View();
+            return View("~/Views/Enviroment/Index.cshtml");
+        }
+        public IActionResult Index(IFormCollection formCollection)
+        {
+            string keyword = formCollection["search"];
+            return Search(keyword);
         }
         public IActionResult RegisterFavorite(IFormCollection formCollection)
         {
@@ -49,8 +53,7 @@ namespace twAspnet.Controllers
             var searchName = formCollection["searchName"];
             var searchId = formCollection["searchId"];
             var searchCreatedAt = formCollection["searchCreatedAt"];
-            //string searchExecution = formCollection["search"];
-
+           
             var favorite = new Favorite
             {
                 Tweet = searchTweet,
@@ -61,13 +64,14 @@ namespace twAspnet.Controllers
                 Favoritedate = DateTime.Now,
             };
 
-
             //DBへInsert
             context.Favorite.Add(favorite);
             //Commit
             context.SaveChanges();
-            
-            return RedirectToAction("Index");
+
+            string keyword = formCollection["searchKey"];
+
+            return Search(keyword);
         }
     }
 }

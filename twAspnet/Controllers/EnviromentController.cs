@@ -13,14 +13,16 @@ namespace twAspnet.Controllers
 {
     public class EnviromentController : Controller
     {
+        //コンテキスト
         private readonly TwaspDbContext context;
-
+        //コンストラクタ
         public EnviromentController(TwaspDbContext context)
         {
             this.context = context;
         }
         public NameValueCollection Form { get; }
 
+        //privateによりURL直で入力する事を防ぐ
         private IActionResult Search(string keyword)
         {
             var enviroment = context.Enviroment.Single();
@@ -70,7 +72,6 @@ namespace twAspnet.Controllers
             context.SaveChanges();
 
             string keyword = formCollection["searchKey"];
-
             return Search(keyword);
         }
     }

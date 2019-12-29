@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,6 @@ namespace twAspnet.Controllers
         {
             this.authenticationSchemeProvider = authenticationSchemeProvider;
         }
-
-
         public async Task<IActionResult> Login()
         {
             var allSchemeProvider = (await authenticationSchemeProvider.GetAllSchemesAsync()).Select(n => n.DisplayName).Where(n => !string.IsNullOrEmpty(n));
@@ -26,6 +25,8 @@ namespace twAspnet.Controllers
         }
         public IActionResult SignIn(string provider)
         {
+            Request.Scheme = "https";
+            Request.Host = new HostString("tweetapi.work");
             return Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
         }
 

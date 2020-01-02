@@ -25,6 +25,7 @@ namespace twAspnet.Controllers
         //privateによりURL直で入力する事を防ぐ
         private IActionResult Search(string keyword)
         {
+            var screenName = User.Claims.FirstOrDefault(_ => _.Type == "screenName")?.Value;
             var enviroment = context.Enviroment.Single();
             ViewData["searchKey"] = keyword;
 

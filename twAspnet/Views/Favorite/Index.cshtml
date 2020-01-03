@@ -3,10 +3,7 @@
 @using twAspnet.Models;
 @model List<Favorite>;
 
-@if((bool)ViewData["searched"])
-{
     <h1>@ViewData["uName"]</h1>
-}
 
 @foreach (var item in Model)
 {

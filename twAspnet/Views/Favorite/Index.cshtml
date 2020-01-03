@@ -3,11 +3,15 @@
 @using twAspnet.Models;
 @model List<Favorite>;
 
+@if((bool)ViewData["searched"])
+{
     <h1>@ViewData["uName"]</h1>
-    @foreach (var item in Model)
-    {
-        <blockquote class="twitter-tweet" data-lang="ja">@item.Tweet &mdash; @item.ScreenName (@item.Name) <a href="https://twitter.com/@item.ScreenName/status/@item.UrlId?ref_src=twsrc%5Etfw">@item.CreatedAt</a></blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    }
+}
+
+@foreach (var item in Model)
+{
+    <blockquote class="twitter-tweet" data-lang="ja">@item.Tweet &mdash; @item.ScreenName (@item.Name) <a href="https://twitter.com/@item.ScreenName/status/@item.UrlId?ref_src=twsrc%5Etfw">@item.CreatedAt</a></blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+}
 
 <p>Learn about <a href="https://www.google.co.jp/">ASP.NET Core MVC Faviroment</a>.</p>

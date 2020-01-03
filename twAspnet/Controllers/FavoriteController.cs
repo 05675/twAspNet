@@ -17,15 +17,21 @@ namespace twAspnet.Controllers
         {
             this.context = context;
         }
-        public IActionResult Index(string screenName)
+        public IActionResult Index()
         {
             //select * from Favorite;と同じ意味。かつList化
             List<Favorite> favorite = context.Favorite.ToList();
 
-            var uName = User.Claims.FirstOrDefault(_ => _.Type == "ScreenName").Value;
-            
-            ViewData["uName"] = uName;
-
+            var uName = User.Claims.FirstOrDefault(_uName => _uName.Type == "ScreenName").Value;
+            if (!string.IsNullOrEmpty(uName))
+            {
+                ViewData["searched"] = true;
+                ViewData["uName"] = uName;
+            }
+            else
+            {
+                ViewData["searched"] = false;
+            }
             return View(favorite);
         }
     }

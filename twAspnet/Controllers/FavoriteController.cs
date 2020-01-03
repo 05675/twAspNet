@@ -22,7 +22,8 @@ namespace twAspnet.Controllers
             //select * from Favorite;と同じ意味。かつList化
             List<Favorite> favorite = context.Favorite.ToList();
 
-            var uName = User.Claims.FirstOrDefault(_ => _.Type == "screenName").Value;
+            var uName = User.Claims.FirstOrDefault(_ => _.Type == "ScreenName").Value;
+            
             ViewData["uName"] = uName;
 
             return View(favorite);

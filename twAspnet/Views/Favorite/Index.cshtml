@@ -3,6 +3,7 @@
 @using twAspnet.Models;
 @model List<Favorite>;
 
+    <h1>@ViewData["uName"]</h1>
     @foreach (var item in Model)
     {
         <blockquote class="twitter-tweet" data-lang="ja">@item.Tweet &mdash; @item.ScreenName (@item.Name) <a href="https://twitter.com/@item.ScreenName/status/@item.UrlId?ref_src=twsrc%5Etfw">@item.CreatedAt</a></blockquote>

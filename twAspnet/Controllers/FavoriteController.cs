@@ -17,11 +17,14 @@ namespace twAspnet.Controllers
         {
             this.context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(string screenName)
         {
             //select * from Favorite;と同じ意味。かつList化
             List<Favorite> favorite = context.Favorite.ToList();
-            
+
+            var uName = User.Claims.FirstOrDefault(_ => _.Type == "screenName").Value;
+            ViewData["uName"] = uName;
+
             return View(favorite);
         }
     }

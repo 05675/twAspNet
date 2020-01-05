@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using twAspnet.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace TwAspnet
 {

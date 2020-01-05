@@ -55,7 +55,7 @@ namespace TwAspnet
                     twitterOptions.Events.OnCreatingTicket = async context =>
                     {
                         var identity = (ClaimsIdentity)context.Principal.Identity;
-                        identity.AddClaim(new Claim("screenName", context.ScreenName));
+                        identity.AddClaim(new Claim("ScreenName", context.ScreenName));
                     };
                 }).AddCookie(options => 
             {

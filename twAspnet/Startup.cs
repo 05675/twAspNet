@@ -51,6 +51,11 @@ namespace TwAspnet
 
                     twitterOptions.ConsumerKey = key;
                     twitterOptions.ConsumerSecret = secretKey;
+                    twitterOptions.Events.OnCreatingTicket = async context =>
+                    {
+                        var identity = (ClaimsIdentity)context.Principal.Identity;
+                        identity.AddClaim(new Claim("screenName", context.ScreenName));
+                    };
                 }).AddCookie(options => 
             {
                 options.LoginPath = "/Auth/Login";

@@ -7,7 +7,7 @@ namespace twAspnet.Models
 {
     public class Favorite
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Comment { get; set; }
         public DateTime Favoritedate { get; set; }
         public string Tweet { get; set; }

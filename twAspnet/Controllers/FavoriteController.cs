@@ -20,9 +20,9 @@ namespace twAspnet.Controllers
         public IActionResult Index()
         {
             //select * from Favorite;と同じ意味。かつList化
-            var userId = User.Claims.FirstOrDefault(_ => _.ValueType == "UserId")?.Value;
-            List<Favorite> favorite = context.Favorite.Where(f => f.Id == userId).ToList();
-            ViewData["UserId"] = userId;
+            var uId = User.Claims.FirstOrDefault(_ => _.ValueType == "ScreenName")?.Value;
+            List<Favorite> favorite = context.Favorite.Where(f => f.Id == uId).ToList();
+            ViewData["uId"] = uId;
             return View(favorite);
         }
     }

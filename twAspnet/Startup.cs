@@ -56,6 +56,7 @@ namespace TwAspnet
                     {
                         var identity = (ClaimsIdentity)context.Principal.Identity;
                         identity.AddClaim(new Claim("ScreenName", context.ScreenName));
+                        identity.AddClaim(new Claim("UserId", context.UserId));
                     };
                 }).AddCookie(options => 
             {

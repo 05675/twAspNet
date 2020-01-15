@@ -23,6 +23,11 @@ namespace twAspnet.Controllers
             var allSchemeProvider = (await authenticationSchemeProvider.GetAllSchemesAsync()).Select(n => n.DisplayName).Where(n => !string.IsNullOrEmpty(n));
             return View(allSchemeProvider);
         }
+        public async Task<IActionResult> Login(string ReturnUrl)
+        {
+            var allSchemeProvider = (await authenticationSchemeProvider.GetAllSchemesAsync()).Select(n => n.DisplayName).Where(n => !string.IsNullOrEmpty(n));
+            return View(allSchemeProvider);
+        }
         public IActionResult SignIn(string provider)
         {
             Request.Scheme = "https";

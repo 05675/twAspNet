@@ -6,6 +6,15 @@
     <title>@ViewData["Title"] - twAspnet</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-primary" asp-controller="Auth" asp-action="SignOut"></a>
+    }
+    else
+    {
+        <a class="btn btn-primary login-button" asp-action="SignIn" asp-route-provider="Twitter">Twitter</a>
+    }
+
 </head>
 <body>
     <header>

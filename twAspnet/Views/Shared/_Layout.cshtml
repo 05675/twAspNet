@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     @if (User.Identity.IsAuthenticated)
     {
-        <a class="btn btn-primary" asp-controller="Auth" asp-action="SignOut"></a>
+        <a class="btn btn-primary" asp-controller="Auth" asp-action="SignOut">SignOut</a>
     }
     else
     {

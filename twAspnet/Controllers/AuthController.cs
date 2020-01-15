@@ -18,12 +18,7 @@ namespace twAspnet.Controllers
         {
             this.authenticationSchemeProvider = authenticationSchemeProvider;
         }
-        public async Task<IActionResult> Login()
-        {
-            var allSchemeProvider = (await authenticationSchemeProvider.GetAllSchemesAsync()).Select(n => n.DisplayName).Where(n => !string.IsNullOrEmpty(n));
-            return View(allSchemeProvider);
-        }
-        public async Task<IActionResult> Login(string ReturnUrl)
+        public async Task<IActionResult> Login(string ReturnUrl = null)
         {
             var allSchemeProvider = (await authenticationSchemeProvider.GetAllSchemesAsync()).Select(n => n.DisplayName).Where(n => !string.IsNullOrEmpty(n));
             return View(allSchemeProvider);

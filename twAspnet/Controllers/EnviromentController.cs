@@ -50,14 +50,16 @@ namespace twAspnet.Controllers
         }
         public IActionResult RegisterFavorite(IFormCollection formCollection)
         {
+            var uId = User.Claims.FirstOrDefault(_ => _.Type == "UserId")?.Value;
             var searchTweet = formCollection["searchTweet"];
             var searchScreenName = formCollection["searchScreenName"];
             var searchName = formCollection["searchName"];
             var searchId = formCollection["searchId"];
             var searchCreatedAt = formCollection["searchCreatedAt"];
-           
+
             var favorite = new Favorite
             {
+                Id = uId,
                 Tweet = searchTweet,
                 ScreenName = searchScreenName,
                 Name = searchName,

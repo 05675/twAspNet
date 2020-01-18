@@ -59,7 +59,7 @@ namespace twAspnet.Controllers
 
             var favorite = new Favorite
             {
-                Id = uId,
+                RegisterUserId = uId,
                 Tweet = searchTweet,
                 ScreenName = searchScreenName,
                 Name = searchName,

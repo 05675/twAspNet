@@ -22,10 +22,16 @@ namespace twAspnet.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Ckey")
+                    b.Property<string>("ASecretKey")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Csecret")
+                    b.Property<string>("AToken")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ATokenSecret")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Akey")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -42,11 +48,26 @@ namespace twAspnet.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("CreatedAt")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Favoritedate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Twid")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RegisterUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ScreenName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Tweet")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrlId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

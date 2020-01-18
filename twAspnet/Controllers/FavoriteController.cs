@@ -21,7 +21,7 @@ namespace twAspnet.Controllers
         {
             //select * from Favorite;と同じ意味。かつList化
             var uId = User.Claims.FirstOrDefault(_ => _.Type == "UserId")?.Value;
-            List<Favorite> favorite = context.Favorite.Where(f => f.Id == uId).ToList();
+            List<Favorite> favorite = context.Favorite.Where(f => f.RegisterUserId == uId).ToList();
             ViewData["uId"] = uId;
             return View(favorite);
         }

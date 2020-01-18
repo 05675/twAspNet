@@ -13,8 +13,10 @@ namespace twAspnet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Ckey = table.Column<string>(nullable: true),
-                    Csecret = table.Column<string>(nullable: true)
+                    Akey = table.Column<string>(nullable: true),
+                    ASecretKey = table.Column<string>(nullable: true),
+                    AToken = table.Column<string>(nullable: true),
+                    ATokenSecret = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,9 +29,14 @@ namespace twAspnet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Twid = table.Column<int>(nullable: false),
+                    RegisterUserId = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
-                    Favoritedate = table.Column<DateTime>(nullable: false)
+                    Favoritedate = table.Column<DateTime>(nullable: false),
+                    Tweet = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    ScreenName = table.Column<string>(nullable: true),
+                    UrlId = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

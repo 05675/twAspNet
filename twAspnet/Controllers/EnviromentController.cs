@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreTweet;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using twAspnet.Models;
 
 namespace twAspnet.Controllers
 {
+    [Authorize]
     public class EnviromentController : Controller
     {
         //コンテキスト

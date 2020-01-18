@@ -8,7 +8,7 @@ using twAspnet.Models;
 
 namespace twAspnet.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class FavoriteController : Controller
     {
         //コンテキスト

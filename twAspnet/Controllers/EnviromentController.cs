@@ -12,7 +12,7 @@ using twAspnet.Models;
 
 namespace twAspnet.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class EnviromentController : Controller
     {
         //コンテキスト
